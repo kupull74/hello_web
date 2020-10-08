@@ -18,3 +18,5 @@ img_txt = src.split('/')[-1]
 image_name=down_path+img_txt
 wget.download(url=src, out=image_name)
 
+# 한글 지원
+# 잘되네 well done
