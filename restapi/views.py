@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 def home(request):
-    return HttpResponse("Hello, Goddamn Django!")
+    return HttpResponse("Hello, God~damn~ Django!")
 
 def taskstring(request):
     result = 'Rest API stinrg!'
