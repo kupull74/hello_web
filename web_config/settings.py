@@ -26,7 +26,7 @@ SECRET_KEY = '!adv^-abh)3$(nnt%z6h02yjrn*e0i$u78zz-=ei-+e8)!k&kp'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
+# git uploada
 
 # Application definition
 
