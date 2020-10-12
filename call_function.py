@@ -19,7 +19,7 @@ import schedule
 #     time.sleep(1)
 
 import naver_movie_ko
-schedule.every(30).minutes.do(naver_movie_ko.ndb)
+schedule.every(3).hours.do(naver_movie_ko.ndb)
 
 while True:
     schedule.run_pending()
