@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from restapi import views as restapiview
+from hello import views as helloview
+#from myhello import views as myhelloview
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +26,10 @@ urlpatterns = [
     # path('restapi/task/string', restapiview.taskstring, name='restapi_task_stinrg'),
     # path('restapi/task/xml', restapiview.taskxml, name='restapi_task_xml'),
     # path('restapi/task/json', restapiview.taskjson, name='restapi_task_json'),
+    path("hello", helloview.hello, name="hello_home"),
+    path("hello/responsewithhtml/", helloview.responsewithhtml),
+    path("", helloview.home, name="home"),
+    path("home", helloview.home),
+    path("hello/form/", helloview.form, name="helloform"),
+    path("hello/template/", helloview.template, name="template"),
 ]

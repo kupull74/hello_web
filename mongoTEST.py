@@ -6,6 +6,7 @@ db_url = 'mongodb://192.168.219.120:27017/'
 with open(path) as fp:
     soup = BeautifulSoup(fp, features='lxml')
     links = soup.select('p[id]')
+    
     with MongoClient(db_url) as client:
         sampledb = client['sample03db']
         title = ''
