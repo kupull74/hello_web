@@ -1,0 +1,8 @@
+<html>
+<table class = "table table-striped">
+<tr> <th>title</th>  <th>links</th> </tr>
+{% for row in page_obj.0 %}
+<tr> <td>{{row.title}}</td> <td><a href="{{row.link}}"/>{{row.link}} </td> </tr>
+{% endfor %}
+</table>
+</html>

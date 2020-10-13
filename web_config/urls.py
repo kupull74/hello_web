@@ -18,7 +18,7 @@ from django.urls import path
 from restapi import views as restapiview
 from hello import views as helloview
 #from myhello import views as myhelloview
-
+from board import views as boardview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,4 +32,5 @@ urlpatterns = [
     path("home", helloview.home),
     path("hello/form/", helloview.form, name="helloform"),
     path("hello/template/", helloview.template, name="template"),
+    path("board/listwithmongo/", boardview.listwithmongo),
 ]
