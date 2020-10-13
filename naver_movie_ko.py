@@ -12,6 +12,8 @@ from pymongo import MongoClient
 #     time.sleep(1)
 #     print(url.format(x))<td class="ac num">17157284</td>
 
+
+
     
 
 def DBinsert(data):
