@@ -200,3 +200,6 @@ def kdb():
 
 #time.sleep(5)
 #driver.close()
+
+if __name__ == "__main__":
+    kdb()
