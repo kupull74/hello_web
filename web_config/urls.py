@@ -19,6 +19,7 @@ from restapi import views as restapiview
 from hello import views as helloview
 #from myhello import views as myhelloview
 from board import views as boardview
+from kstartup import views as kstartupview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,4 +34,5 @@ urlpatterns = [
     path("hello/form/", helloview.form, name="helloform"),
     path("hello/template/", helloview.template, name="template"),
     path("board/listwithmongo/", boardview.listwithmongo),
+    path("kstartup/listwithmongo/", kstartupview.listwithmongo),
 ]

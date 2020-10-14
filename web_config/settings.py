@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'restapi.apps.RestapiConfig',
     'hello.apps.HelloConfig',
     'myhello.apps.MyhelloConfig',
+    'kstartup.apps.KstartupConfig',
+
 
     'django.contrib.admin',
     'django.contrib.auth',

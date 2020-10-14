@@ -1,0 +1,26 @@
+<html>
+<table class = "table table-striped">
+    <tr> <th>Category</th>  <th>Term</th> <th>Title</th> <th>Sorting</th><th>Company</th><th>due</th></tr>
+    {% for row in page_buse.0 %}
+    <!-- 
+    <tr> <td>{{row.title}}</td> 
+    <td><a href="{{row.link}}"/>{{row.link}} </td> </tr>
+    -->
+    <tr>
+        <td>{{row.Category}}</td>
+        <td>{{row.Term}}</td>
+        <td>{{row.Title}}</td>
+        <td>{{row.sorting}}</td>
+        <td>{{row.Company}}</td>
+        <td>{{row.Due}}</td>
+        {% endfor %}
+    </tr>
+</table>
+</html>
+
+<!--
+Category" : "행사·네트워크", "Term" : "마감5일전", 
+"Title" : "2020 대구·경북 스타트업 페스티벌 「비대면 분야 창업아이디어 경진대회」 참가자 모집", 
+"sorting" : "대구·경북 스타트업 페스티벌 「비대면 분야 창업아이디어 경진대회」", 
+"Company" : "경북창조경제혁신센터", "Due" : "2020-10-19" }
+-->
