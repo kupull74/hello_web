@@ -1,4 +1,4 @@
 # hello_web
 
 
-<img src = "from hello_web/kstartup1.png">
+<img src = "kstartup1.png">
