@@ -1,21 +1,21 @@
 <html>
-<table class = "table table-striped">
-    <tr> <th>Category</th>  <th>Term</th> <th>Title</th> <th>Sorting</th><th>Company</th><th>due</th></tr>
-    {% for row in page_buse.0 %}
-    <!-- 
-    <tr> <td>{{row.title}}</td> 
-    <td><a href="{{row.link}}"/>{{row.link}} </td> </tr>
-    -->
-    <tr>
-        <td>{{row.Category}}</td>
-        <td>{{row.Term}}</td>
-        <td>{{row.Title}}</td>
-        <td>{{row.sorting}}</td>
-        <td>{{row.Company}}</td>
-        <td>{{row.Due}}</td>
-        {% endfor %}
-    </tr>
-</table>
+    <table class = "table table-striped">
+        <tr> <th align="left">카테고리</th>  <th align="left">마감시한</th> <th align="left">제목</th> <th align="left">소제목</th><th align="left">집행기관</th><th align="left">마감일자</th></tr>
+        {% for row in page_buse.0 %}
+        <!-- 
+        <tr> <td>{{row.title}}</td> 
+        <td><a href="{{row.link}}"/>{{row.link}} </td> </tr>
+        -->
+        <tr>
+            <td>{{row.Category}}</td>
+            <td>{{row.Term}}</td>
+            <td>{{row.Title}}</td>
+            <td>{{row.sorting}}</td>
+            <td>{{row.Company}}</td>
+            <td>{{row.Due}}</td>
+            {% endfor %}
+        </tr>
+    </table>
 </html>
 
 <!--
