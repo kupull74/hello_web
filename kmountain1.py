@@ -10,8 +10,15 @@ from selenium.webdriver.common.by import By
 import wget
 import urllib.request
 
-driver = webdriver.Chrome("/home/jerry/Documents/Develop/chromedriver")
-driver.get("https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do;jsessionid=KV7jMa7yvwa8InddqpDOrg4h54vcVDsxuOW3htTMnD2C12yaVHM6aHMV7DNhEvIO.frswas01_servlet_engine5")
+
+# driver = webdriver.Chrome("/home/jerry/Documents/Develop/chromedriver")
+# driver.get("https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do;jsessionid=KV7jMa7yvwa8InddqpDOrg4h54vcVDsxuOW3htTMnD2C12yaVHM6aHMV7DNhEvIO.frswas01_servlet_engine5")
+
+url = "https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=1&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntUnit=100"
+res = requests.get(url=url)
+soup = BeautifulSoup(res.content, features='lxml')
+
+
 
 #산 이름 완료 
 # for page in range(1,11):   #숫자 수정
@@ -46,25 +53,65 @@ driver.get("https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/Fmmnt
 
 
 # 이미지 성공
-
 # driver.find_element_by_xpath('//*[@id="mntUnit"]/option[5]').click() 
 # driver.find_element_by_xpath('//*[@id="txt"]/form/div[2]/div[2]/button').click()
 
-# elements=driver.find_elements_by_css_selector(".autosize") #.get_attribute("src")
+# mimgs=driver.find_elements_by_css_selector(".autosize") #.get_attribute("src")
 # count = 1 
-# for element in elements:
-#     #print(element)
+# for mimg in mimgs:
+#     #print(mimgs)
 #     count = count + 1
-#     imgs = element.get_attribute("src")
+#     imgs = mimg.get_attribute("src")
 #     urllib.request.urlretrieve(imgs, str(count) + ".jpg")
 
 
 # 산 간결설명
 # #//*[@id="txt"]/ul/li[1]/a/div/div[1]/img
-driver.find_element_by_xpath('//*[@id="txt"]/ul/li[1]/a/div/div[1]/img').click() 
-elements=driver.find_elements_by_tag_name('#txt > h4')
-for element in elements:
-    print(element.text.lstrip().split("-")[1])
+# #driver.find_element_by_xpath('//*[@id="txt"]/ul/li[1]/a/div/div[1]/img').click()    #이건 xpath 형식으로 찾기
+
+# mimgs=driver.find_elements_by_css_selector(".autosize")
+# for mimg in mimgs:
+#     time.sleep(15)
+#     mimg.click()
+    
+#     mbrief=driver.find_element_by_tag_name('#txt > h4')
+#     print(mbrief.text.lstrip().split("-")[1])
+#     driver.back();
+
+briefs = soup.select('#txt > ul > li > a')
+#txt > ul > li > a
+#txt > ul > li:nth-child(2) > a 
+for brief in briefs:
+    link = brief['href']
+    mlink = "https://forest.go.kr/" + link
+    #print(mlink)
+    url = mlink
+    res = requests.get(url=url)
+    soup = BeautifulSoup(res.content, features='lxml')
+    mbriefs = soup.select('#txt > h4')
+    for mbrief in mbriefs:
+        if "-" in mbrief.text:
+            comm = mbrief.text.lstrip().split("-")[1]
+        else:
+            comm = ""    
+        print(comm)
+
+#100개로 만든 문서
+# https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=1&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntUnit=100
+
+# a href로 가져온 놈
+# https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/ClbngManage/selectMntnInfoDetail.do?mntnId=20000004&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntIndex=1&mntUnit=100
+ 
+# https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/ClbngManage/selectMntnInfoDetail.do?mntnId=20000004&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntIndex=1&mntUnit=100
+
+# http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/ClbngManage/selectMntnInfoDetail.do?mntnId=20000004&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntIndex=1&mntUnit=10
+
+# http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/ClbngManage/selectMntnInfoDetail.do?mntnId=20000006&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntIndex=1&mntUnit=10
+
+# http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/ClbngManage/selectMntnInfoDetail.do?mntnId=20000009&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntIndex=1&mntUnit=10
+
+# for mbrief in mbriefs:                                                            #상세페이지에서는 굳이 for문 돌릴 필요 없음.
+#     print(mbrief.text.lstrip().split("-")[1])   
 
 # down_path = '/home/jerry/Documents/Develop/pictures/'
 # for element in elements:
@@ -73,7 +120,11 @@ for element in elements:
 # image_name=down_path+img_txt
 # wget.download(url=src, out=image_name)
 
-driver.close()
+# 간결설명 구문
+# //*[@id="txt"]/ul/li[1]/a/div/div[1]/img
+# //*[@id="txt"]/ul/li[2]/a/div/div[1]/img
+# //*[@id="txt"]/ul/li[100]/a/div/div[1]/img
+#driver.close()
 
 #1번째 이미지
 #https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mn=NKFS_03_01_12
