@@ -21,6 +21,7 @@ from hello import views as helloview
 from board import views as boardview
 from kstartup import views as kstartupview
 from maps import views as mapsview
+from kmountain import views as kmountainview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,4 +39,7 @@ urlpatterns = [
     path("kstartup/listwithmongo/", kstartupview.listwithmongo),
     path("board/listwithmongowithpaginator/", boardview.listwithmongowithpaginator),
     path("maps/showmapwithfolium/", mapsview.showmapwithfolium),
+    path("kmountain/mountainlist/", kmountainview.mountainlist),
+    path("kmountain/home/", kmountainview.home),
+    path("kmountain/ms/", kmountainview.ms),
 ]

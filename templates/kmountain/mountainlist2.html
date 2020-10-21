@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+        
+
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+        <style>
+            div.map{
+                margin-top: 15px;
+                width : 100%;
+                height:100% ;
+            }
+        </style>
+    </head>
+    <!--<nav class="navbar navbar-expand-sm bg-dark navbar-dark"> -->
+    <body>
+    <!--"table table-striped"-->   
+    <table class = "table">
+        <tr><td align="center"><H2> <a href="https://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=1&searchMnt=&searchCnd=&mn=NKFS_03_01_12&orgId=&mntUnit=100" target="_blank">대한민국 100대 명산 LIST </a></H2></td></tr>
+    </table>
+    <table class = "table">
+        <tr> <th align="left">산명칭</th>  <th align="left">해발</th> <th align="left">간략설명</th> <th align="left">날씨정보</th></tr>
+        {% for row in page_buse.0 %}
+        <!-- 
+        <tr> <td>{{row.title}}</td> 
+        <td><a href="{{row.link}}"/>{{row.link}} </td> </tr>
+        -->
+        <tr>
+            <td>{{row.M_name}}</td>
+            <td>{{row.M_height}}</td>
+            <td><a href="{{row.M_link}}" target = "_blank">{{row.M_brief}}</a></td>
+            <!-- <td><a href="http://127.0.0.1:8000/maps/showmapwithfolium/" target = "_blank">{{row.M_brief}}</a></td> --> 
+            <td>{{row.M_weather}}</td>
+            {% endfor %}
+        </tr>
+    </table>
+   </body>
+   {% for row in page_data %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td><a href="detail/{{ row.mt_num }}" target = "_blank">{{ row.mt_name }}</a></td>
+                            <td>{{ row.mt_address }}</td>
+                            <td>{{ row.mt_height }}m</td>
+                        </tr>
+                    </tbody>
+                        {% endfor %}
+                </table>
+            </div>
+                <ul class="pagination">
+                    {% if page_data.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_data.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    <li class="page-item active"><a class="page-link" href="#">Page {{ page_data.number }} of {{ page_data.paginator.num_pages }}</a></li>
+                    {% if page_data.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_data.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_data.paginator.num_pages }}">last &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+</html>
+
+
+<!--
+Category" : "행사·네트워크", "Term" : "마감5일전", 
+"Title" : "2020 대구·경북 스타트업 페스티벌 「비대면 분야 창업아이디어 경진대회」 참가자 모집", 
+"sorting" : "대구·경북 스타트업 페스티벌 「비대면 분야 창업아이디어 경진대회」", 
+"Company" : "경북창조경제혁신센터", "Due" : "2020-10-19" }
+-->
