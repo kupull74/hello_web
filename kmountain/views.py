@@ -103,7 +103,13 @@ def mountainlist(request):
 #         mountaindb = client.mountaindb
 #         result = list(mountaindb.mtdbColl.find({}))
 #         data['page_buse']=result
-        
-        
-
 #         return render(request, 'kmountain/mountainlist.html', context=data)
+
+def housing(request):
+    data = request.GET.copy()
+    with MongoClient('mongodb://127.0.0.1:27017/') as client:
+        mountaindb = client.mountaindb
+        #result = list(mountaindb.mtdbColl.find({}))
+        #data['page_buse']=result
+        
+        return render(request, 'kmountain/housing.html', context=data)
