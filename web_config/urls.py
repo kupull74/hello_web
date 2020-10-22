@@ -43,4 +43,6 @@ urlpatterns = [
     path("kmountain/home/", kmountainview.home),
     path("kmountain/ms/", kmountainview.ms),
     path("kmountain/housing/", kmountainview.housing),
+    path("kmountain/mzoom/", kmountainview.mzoom),
+    path('kmountain/ms/mzoom/<int:M_num>/', kmountainview.mzoom, name='mzoom'),
 ]

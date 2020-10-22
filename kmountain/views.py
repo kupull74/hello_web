@@ -33,7 +33,7 @@ def ms(request):
                 f"Height : {mt_data['M_height']}<br><br>" +
                 f"Brief : {mt_data['M_brief']}<br>", script=True
             )
-            pop_up = folium.Popup(pop_text, max_width=100)
+            pop_up = folium.Popup(pop_text, max_width=110)
             folium.CircleMarker(lat_lon, popup=pop_up, tooltip=mt_data['M_name'], color='red', fill=True, fill_color='green').add_to(m)
 
         paginator = Paginator(result, 10) # Show 15 contacts per page.
@@ -104,6 +104,7 @@ def mountainlist(request):
 #         data['page_buse']=result
 #         return render(request, 'kmountain/mountainlist.html', context=data)
 
+
 def housing(request):
     data = request.GET.copy()
     with MongoClient('mongodb://127.0.0.1:27017/') as client:
@@ -112,3 +113,27 @@ def housing(request):
         #data['page_buse']=result
         
         return render(request, 'kmountain/housing.html', context=data)
+
+
+
+
+def mzoom(request, M_num):
+    with MongoClient('mongodb://127.0.0.1:27017') as client:
+        mountaindb = client.mountaindb 
+
+        mt_data = mountaindb.mtdbColl.find({"M_num" : M_num})[0]
+        
+        lat_lon = [mt_data['M_lat'], mt_data['M_long']]
+        m = folium.Map(lat_lon, zoom_start=11)
+        
+        pop_text = folium.Html(
+                f"Mountain : {mt_data['M_name']}<br>" +
+                f"Height : {mt_data['M_height']}<br><br>" +
+                f"Brief : {mt_data['M_brief']}<br>", script=True
+            )
+        pop_up = folium.Popup(pop_text, max_width=110)
+        folium.CircleMarker(lat_lon, popup=pop_up, tooltip=mt_data['M_name'], color='red', fill=True, fill_color='green').add_to(m)
+
+        m = m._repr_html_()
+        data = {'mountain_map' : m}
+        return render(request, 'kmountain/mzoom.html', context=data)
