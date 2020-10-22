@@ -35,18 +35,6 @@ soup = BeautifulSoup(res.content, features='lxml')
 
 
 
-for i in range(1,101):
-    mt_data = {"m_num":i},
-
-# 산 이름 완료 
-# for page in range(1,11):   #숫자 수정
-#    raw = requests.get("http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=" + str(page * 1)).text
-#    html = BeautifulSoup(raw, 'lxml')
-#    Mnames = html.select('div.list_info > strong ') 
-#    for Mname in Mnames:
-#        print(Mname.text)
-
-
 mnames = []
 #산 이름 non for문 ()안 산 이름 제거하기 성공!!
 m_names = soup.select('div.list_info > strong ') 
@@ -58,14 +46,6 @@ for mname in mnames:
     print(mname)
 
     
-# 높이 실패
-# for page in range(1,11):   #숫자 수정
-#    raw = requests.get("http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=" + str(page * 1)).text
-#    html = BeautifulSoup(raw, 'lxml')
-#    heights = html.select('li:nth-child(1) > span:nth-child(2)') 
-#    for height in heights:
-#        print(height.text)
-
 
 #높이 non for문
 mheights = []
@@ -75,14 +55,6 @@ for m_height in m_heights:
     for mheight in mheights:
         print(mheight)
 
-
-#이미지 실패
-# for page in range(1,11):   #숫자 수정
-#    raw = requests.get("http://www.forest.go.kr/kfsweb/kfi/kfs/foreston/main/contents/FmmntSrch/selectFmmntSrchList.do?mntIndex=" + str(page * 1)).text
-#    html = BeautifulSoup(raw, 'lxml')
-#    heights = html.select('img.autosize') 
-#    for height in heights:
-#        print(height)
 
 
 
@@ -179,7 +151,12 @@ for m_link in m_links:
 #     #'M_brief':mbrief, 'M_weather':mweather,
 
 
+mnum = 0
+
 for mname, mheight, mbrief, mweather, m_link in zip(mnames, mheights, mbriefs, mweathers, m_links):
+    mnum = mnum + 1
+    print(mnum)
+
     url = "https://dapi.kakao.com/v2/local/search/keyword.json"
     #Host: dapi.kakao.com
     h = {"Authorization": "KakaoAK ea6791d8e5bb4b2a00e58692de73a617"}
@@ -204,6 +181,44 @@ for mname, mheight, mbrief, mweather, m_link in zip(mnames, mheights, mbriefs, m
 
     alink = m_link['href']
     mlink = "https://forest.go.kr" + alink
-    data = {'M_name':mname, 'M_address':maddress, 'M_long':mlong, 'M_lat':mlat, 'M_height':mheight, 'M_brief':mbrief, 'M_weather':mweather, 'M_link':mlink}
+    data = {'M_num':mnum, 'M_name':mname, 'M_address':maddress, 'M_long':mlong, 'M_lat':mlat, 'M_height':mheight, 'M_brief':mbrief, 'M_weather':mweather, 'M_link':mlink}
     #print(data)
     DBinsert(data)
+
+
+
+
+#테스트용
+# mnum = 0
+# for mname, mheight, m_link in zip(mnames, mheights, m_links):
+    
+#     mnum = mnum + 1
+#     print(mnum)
+    
+#     url = "https://dapi.kakao.com/v2/local/search/keyword.json"
+#     #Host: dapi.kakao.com
+#     h = {"Authorization": "KakaoAK ea6791d8e5bb4b2a00e58692de73a617"}
+#     #address_name,&x={lon}&y={lat}}
+#     p = {"query":mname}
+#     res = requests.get(url = url, params= p, headers = h)
+#     # print(res.status_code)
+#     # print(res.content)
+
+#     #제이슨의 컨텐츠들 묶여있는 dic 보기
+#     #json.loads(res.content)[0]
+
+#     #첫번째 다큐먼트s 중에서 첫번째 내용들 선별해서 뽑아내기
+#     #json.loads(res.content)['documents'][0]
+#     maddress=(json.loads(res.content)['documents'][0]['address_name'])
+#     print(maddress)
+#     mlong=(json.loads(res.content)['documents'][0]['x'])
+#     print(mlong)
+#     mlat=(json.loads(res.content)['documents'][0]['y'])
+#     print(mlat)
+
+
+#     alink = m_link['href']
+#     mlink = "https://forest.go.kr" + alink
+#     data = {'M_num':mnum, 'M_name':mname, 'M_address':maddress, 'M_long':mlong, 'M_lat':mlat, 'M_height':mheight, 'M_link':mlink}
+#     #print(data)
+#     DBinsert(data)
