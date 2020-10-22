@@ -76,17 +76,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
                         <tr class="thead-dark">
                             <th>Num</th>
                             <th>Name</th>
-                            <th>Address</th>
+                            <th>Weather</th>
                             <th>Height</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for row in page_obj %}
                         <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ row.M_name }}</a></td>
-                            <td>{{ row.M_address }}</a></td>
-                            <td>{{ row.M_height }}</td>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{row.M_name}}</a></td>
+                            <td>{{row.M_weather}}</a></td>
+                            <td>{{row.M_height}}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
