@@ -30,11 +30,10 @@ def ms(request):
             lat_lon = [mt_data['M_lat'], mt_data['M_long']]
             pop_text = folium.Html(
                 f"Mountain : {mt_data['M_name']}<br>" +
-                f"Height : {mt_data['M_height']}<br>" +
-                f"Weather : {mt_data['M_weather']}<br>" +
-                f"Address : {mt_data['M_address']}<br>", script=True
+                f"Height : {mt_data['M_height']}<br><br>" +
+                f"Brief : {mt_data['M_brief']}<br>", script=True
             )
-            pop_up = folium.Popup(pop_text)
+            pop_up = folium.Popup(pop_text, max_width=100)
             folium.CircleMarker(lat_lon, popup=pop_up, tooltip=mt_data['M_name'], color='red', fill=True, fill_color='green').add_to(m)
 
         paginator = Paginator(result, 10) # Show 15 contacts per page.
