@@ -36,6 +36,19 @@
             {% endfor %}
         </tr>
     </table>
+    <ul class="pagination">
+                    {% if page_buse.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_buse.previous_page_number }}">Previous</a></li>
+                    {% endif %}
+                    <li class="page-item active"><a class="page-link" href="#">Page {{ page_buse.number }} of
+                            {{ page_buse.paginator.num_pages }}</a></li>
+                    {% if page_buse.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_buse.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ page_buse.paginator.num_pages }}">last &raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
    </body>
 </html>
 
