@@ -4,7 +4,7 @@ from django.shortcuts import render
 from pymongo import MongoClient
 def listwithmongo(request):
     data = request.GET.copy()
-    with MongoClient('mongodb://127.0.0.1:27017/') as client:
+    with MongoClient('mongodb://192.168.0.134:8087/') as client:
         kstartup = client.kstartup
         result = list(kstartup.kdbCollection.find({}))
         data['page_buse']=result
