@@ -13,7 +13,7 @@ import json
 
 #디비 함수 만들기
 def DBinsert(data):
-    db_url = 'mongodb://192.168.0.134:8088/'
+    db_url = 'mongodb://192.168.0.134:8087/'
 
     with MongoClient(db_url) as client:
         mtdb = client['mountaindb']
