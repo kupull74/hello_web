@@ -16,7 +16,7 @@ soup = BeautifulSoup(res.content, features='lxml')
 
 
 def DBinsert(data):
-    db_url = 'mongodb://192.168.0.134:8087/'
+    db_url = 'mongodb://192.168.0.134:8088/'
 
     with MongoClient(db_url) as client:
         kdb = client['kstartup']

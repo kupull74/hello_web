@@ -8,7 +8,7 @@ from urllib import parse
 
 def home(request):
     data = request.GET.copy()
-    with MongoClient('mongodb://192.168.0.134:8087/') as client:
+    with MongoClient('mongodb://192.168.0.134:8088/') as client:
         mountaindb = client.mountaindb
         #result = list(mountaindb.mtdbColl.find({}))
         #data['page_buse']=result
@@ -21,7 +21,7 @@ def ms(request):
     m = folium.Map(center, zoom_start=7)
     data = request.GET.copy()
 
-    with MongoClient('mongodb://192.168.0.134:8087/') as client:
+    with MongoClient('mongodb://192.168.0.134:8088/') as client:
         mountaindb = client.mountaindb
         #mt_data_list = list(mountaindb.mtdbColl.find({}))
         result = list(mountaindb.mtdbColl.find({}))
@@ -84,7 +84,7 @@ def ms(request):
 
 def mountainlist(request):
     data = request.GET.copy()
-    with MongoClient('mongodb://192.168.0.134:8087/') as client:
+    with MongoClient('mongodb://192.168.0.134:8088/') as client:
         mountaindb = client.mountaindb
         result = list(mountaindb.mtdbColl.find({}))
         data['page_buse']=result
@@ -107,7 +107,7 @@ def mountainlist(request):
 
 def housing(request):
     data = request.GET.copy()
-    with MongoClient('mongodb://192.168.0.134:8087/') as client:
+    with MongoClient('mongodb://192.168.0.134:8088/') as client:
         mountaindb = client.mountaindb
         #result = list(mountaindb.mtdbColl.find({}))
         #data['page_buse']=result
@@ -118,7 +118,7 @@ def housing(request):
 
 
 def mzoom(request, M_num):
-    with MongoClient('mongodb://192.168.0.134:8087/') as client:
+    with MongoClient('mongodb://192.168.0.134:8088/') as client:
         mountaindb = client.mountaindb 
 
         mt_data = mountaindb.mtdbColl.find({"M_num" : M_num})[0]
